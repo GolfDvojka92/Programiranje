@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1602159437 source:d:\programi\zadatak\main.c
+	<stdio.h>
+	<stdlib.h>
+
