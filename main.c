@@ -1,37 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define MAX_DUZINA 20
+
+int jednaki(char *s1, char *s2)
+{
+    int i;
+    for(i=0;i<strlen(s1);i++)
+    {
+        if(s1[i]!=s2[i])
+        {
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
+    }
+}
 
 int main()
 {
-    int i, j, n;
-    printf("Unesite dimenziju kvadratne matrice: ");
-    scanf("%d", &n);
-    float mat[n][n];
-    printf("Unesite clanove matrice:\n");
-    for(i=0;i<n;i++)
+    char s1[MAX_DUZINA], s2[MAX_DUZINA];
+    printf("Unesite prvi string: ");
+    gets(s1);
+    printf("Unesite drugi string: ");
+    gets(s2);
+    if(jednaki(s1,s2)==0)
     {
-        for(j=0;j<n;j++)
-        {
-            printf("\tmat[%d][%d]: ", i+1,j+1);
-            scanf("%f", &mat[i][j]);
-        }
+        printf("Stringovi nisu jednaki.");
     }
-    float mat2[n][n];
-    for(i=0;i<n;i++)
+    else
     {
-        for(j=0;j<n;j++)
-        {
-            mat2[i][j]=mat[j][i];
-        }
-    }
-    printf("Transponovana matrica:\n");
-    for(i=0;i<n;i++)
-    {
-        for(j=0;j<n;j++)
-        {
-            printf("%.2f ", mat2[i][j]);
-        }
-        printf("\n");
+        printf("Stringovi su jednaki.");
     }
     return 0;
 }
