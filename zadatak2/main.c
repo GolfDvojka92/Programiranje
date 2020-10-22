@@ -1,39 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
-#define MAX_DUZINA 20
-
-int jednaki(char *s1, char *s2)
+typedef struct
 {
-    int i;
-    for(i=0;i<strlen(s1);i++)
-    {
-        if(s1[i]!=s2[i])
-        {
-            return 0;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-}
+    int brGost;
+    char imePice[100];
+    float apetit;
+}zeljeno;
+
+typedef struct
+{
+    float brPar;
+    unsigned int brCelih;
+    char imePice[100];
+}porudzbina;
 
 int main()
 {
-    char s1[MAX_DUZINA], s2[MAX_DUZINA];
-    printf("Unesite prvi string: ");
-    gets(s1);
-    printf("Unesite drugi string: ");
-    gets(s2);
-    if(jednaki(s1,s2)==0)
+    FILE *f1,*f2;
+    f1=fopen("zeljeno.txt","r");
+    f2=fopen("porudzbina.txt","w+");
+    zeljeno z[100];
+    int i=0,n;
+    char c;
+    while(1)
     {
-        printf("Stringovi nisu jednaki.");
+        fscanf(f1,"%d",&z[i].brGost);
+        fseek(f1,1,SEEK_CUR);
+        fscanf(f1,"%s",z[i].imePice);
+        fseek(f1,1,SEEK_CUR);
+        fscanf(f1,"%f",&z[i].apetit);
+        c=getc(f1);
+        i++;
+        n=i;
+        if(c==EOF)
+        {
+            break;
+        }
     }
-    else
+    porudzbina p[100];
+    float tmp;
+    for(i=0;i<n;i++)
     {
-        printf("Stringovi su jednaki.");
+        p[i].brPar=z[i].apetit*z[i].brGost;
+        tmp=p[i].brPar/8;
+        tmp=ceil(tmp);
+        p[i].brCelih=tmp;
+        strcpy(p[i].imePice, z[i].imePice);
+    }
+    for(i=0;i<n;i++)
+    {
+        fprintf(f2,"%.1f ",p[i].brPar);
+        fprintf(f2,"%u ",p[i].brCelih);
+        fprintf(f2,"%s\n",p[i].imePice);
     }
     return 0;
 }
