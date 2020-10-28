@@ -1,33 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-
-#define MAX_DUZINA 20
-
-int provera(char c, char *s1)
-{
-    int i,brojac=0;
-    for(i=0;i<strlen(s1);i++)
-    {
-        if(*(s1+i)==c)
-        {
-            brojac++;
-        }
-    }
-    return brojac;
-}
 
 int main()
 {
-    int n;
-    char c;
-    char s1[MAX_DUZINA];
-    printf("Unesite string: ");
-    gets(s1);
-    printf("Unesite karakter za proveru: ");
-    scanf("%c", &c);
-    fflush(stdin);
-    n=provera(c,s1);
-    printf("Karakter %c se pojavljuje %d puta u unesenom stringu. ", c, n);
+    int *niz;
+    int n=5;
+    niz=(int*)malloc(n*sizeof(int));
+    printf("Unesite pozitivne elemente niza(na kraju niza unesite 0):\n");
+    int i;
+    for(i=0;;i++)
+    {
+        if(i>n)
+        {
+            n*=2;
+            (int*)realloc(niz,n*sizeof(int));
+        }
+        printf("\tniz[%d]=",i+1);
+        scanf("%d",&niz[i]);
+        if(niz[i]<0)
+        {
+            printf("Uneli ste negativan broj!\nUnesite ponovo isti clan niza: ");
+            scanf("%d",&niz[i]);
+        }
+        if(niz[i]==0)
+        {
+            break;
+        }
+    }
+    printf("Unesen niz:");
+    for(i=0;;i++)
+    {
+        if(niz[i]==0)
+        {
+            break;
+        }
+        printf("%d ",niz[i]);
+    }
     return 0;
 }

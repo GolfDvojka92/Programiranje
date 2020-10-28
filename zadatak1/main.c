@@ -1,35 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <ctype.h>
+
+#define MAX_DUZINA 100
 
 int main()
 {
-    char s[100];
-    printf("Unesite ime datoteke (ime.txt): ");
+    char *s;
+    s=(char*)malloc(MAX_DUZINA * sizeof(char));
+    printf("Unesite string: ");
     gets(s);
-    FILE *f;
-    f=fopen(s,"r+");
-    if(f==NULL)
+    int i;
+    for(i=0;;i++)
     {
-        printf("Datoteka ne moze biti otvorena");
-        return 0;
-    }
-    char c;
-    while(1)
-    {
-        c=fgetc(f);
-        if(c==EOF)
+        if(s[i]=='\0')
         {
             break;
         }
-        if(c>='a' && c<='z')
-        {
-            c-=32;
-        }
-        fseek(f,-1,SEEK_CUR);
-        fputc(c,f);
-        fseek(f,0,SEEK_CUR);
+        s[i]=toupper(s[i]);
     }
-    fclose(f);
+    printf("Prepravljeni string: ");
+    puts(s);
     return 0;
 }

@@ -1,7 +1,5 @@
 # depslib dependency file v1.0
-1603380442 source:d:\programi\zadatak2\main.c
+1603896758 source:d:\programi\zadatak2\main.c
 	<stdio.h>
 	<stdlib.h>
-	<string.h>
-	<math.h>
 
